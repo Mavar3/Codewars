@@ -10,6 +10,7 @@ namespace CodewarsEx2
     {
         static void Main(string[] args)
         {
+            //https://www.codewars.com/kata/515decfd9dcfc23bb6000006/train/csharp
             bool is_valid_IP(string ipAddres)
             {
                 string[] Numbers = ipAddres.Split('.');

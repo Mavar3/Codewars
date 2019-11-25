@@ -10,9 +10,17 @@ namespace CodewarsEx2
     {
         static void Main(string[] args)
         {
+            //Первое задание
             //https://www.codewars.com/kata/515decfd9dcfc23bb6000006/train/csharp
             bool is_valid_IP(string ipAddres)
             {
+                /*The best solution
+                 *
+                    IPAddress ip;
+                    bool validIp = IPAddress.TryParse(IpAddres, out ip);
+                    return validIp && ip.ToString()==IpAddres;
+                 *
+                 */ 
                 string[] Numbers = ipAddres.Split('.');
                 if (Numbers.Length != 4)
                     return false;
@@ -28,7 +36,7 @@ namespace CodewarsEx2
                         }
                         if (Int32.TryParse(Numbers[i], out int Num) & Numbers[i][0] != '-')
                             if (Numbers[i].Length > 1 & Int32.Parse(Numbers[i][0].ToString()) == 0 |
-                                Int32.Parse(Numbers[i]) < 0 | Int32.Parse(Numbers[i]) > 255)
+                                Convert.ToInt32(Numbers[i]) < 0 | Convert.ToInt32(Numbers[i]) > 255)
                                 return false;
                             else
                                 continue;
@@ -55,6 +63,72 @@ namespace CodewarsEx2
             Console.WriteLine(is_valid_IP("12.34.56 .1"));
             Console.WriteLine(is_valid_IP("12.34.56.-1"));
             Console.WriteLine(is_valid_IP("123.045.067.089"));
+            Console.ReadKey();
+
+            //Второе задание
+            //https://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/csharp
+
+            bool validBraces(String braces)
+            {
+                /*int counter1 = 0;   //  ()
+                int counter2 = 0;   //  []
+                int counter3 = 0;   //  {}
+                char[] count = braces.ToCharArray();
+                for (int i = 0; i < braces.Length; i++)
+                {
+                    if (count[i] == '(')
+                        counter1++;
+                    if (count[i] == '[')
+                        counter2++;
+                    if (count[i] == '{')
+                        counter3++;
+                    if (count[i] == ')' | count[i] == ']' | count[i] == '}' & counter1 != 0 &
+                        counter2 != 0 & counter3 != 0)
+                        for (int j = i; j < braces.Length; j++)
+                        {
+                            if ()
+                        }
+                }
+                return true;
+            */
+                int[,] simpos = new int[3, braces.Length / 2];  //simbol & position
+                int simbol1Count = 0;
+                int simbol2Count = 0;
+                int simbol3Count = 0;
+                int simbol1Pos = 0;
+                int simbol2Pos = 0;
+                int simbol3Pos = 0;
+                for (int i = 0; i < braces.Length; i++)
+                {
+                    if (braces[i] == '(')   //  0
+                    {
+                        simpos[0, simbol1Pos] = i;
+                        simbol1Count++;
+                        simbol1Pos++;
+                    }
+                    if (braces[i] == '[')   //  1
+                    {
+                        simpos[0, simbol2Pos] = i;
+                        simbol2Count++;
+                        simbol2Pos++;
+                    }
+                    if (braces[i] == '{')   //  2
+                    {
+                        simpos[0, simbol3Pos] = i;
+                        simbol3Count++;
+                        simbol3Pos++;
+                    }
+                    if (braces[i] == ')')
+                    {
+
+                    }
+                }
+            }
+            Console.WriteLine(validBraces("(){}[]"));     
+            Console.WriteLine(validBraces("([{}])"));     
+            Console.WriteLine(validBraces("(}"));  
+            Console.WriteLine(validBraces("[(])"));     
+            Console.WriteLine(validBraces("[({})](]"));
             Console.ReadKey();
         }
     }

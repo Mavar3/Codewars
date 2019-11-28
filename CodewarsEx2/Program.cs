@@ -72,33 +72,45 @@ namespace CodewarsEx2
             bool validBraces(String braces)
             {
                 char[] counter = braces.ToCharArray();
+                int d = 0;
                 for (int i = 0; i < counter.Length; i++)
                 {
                     switch (counter[i])
                     {
                         case ')':
                             int j = i - 1;
-                            int count = 0;
+                            int count;
+                            if (j >= 0)
+                                count = 0;
+                            else
+                                count = 1000;
                             while (j >= 0 && counter[j] != '(')
                             {
                                 if (counter[j] == '[' | counter[j] == '{')
                                     count++;
                                 else
                                     if (counter[j] != 'z')
-                                        count--;
+                                    count--;
                                 j--;
                             }
                             if (count != 0)
                                 return false;
+                            counter[i] = 'z';
+                            if (j >= 0)
+                            {
+                                counter[j] = 'z';
+                            }
                             else
                             {
-                                counter[i] = 'z';
-                                counter[j] = 'z';
+                                counter[j + 1] = 'z';
                             }
                             break;
                         case ']':
                             j = i - 1;
-                            count = 0;
+                            if (j >= 0)
+                                count = 0;
+                            else
+                                count = 1000;
                             while (j >= 0 && counter[j] != '[')
                             {
                                 if (counter[j] == '(' | counter[j] == '{')
@@ -110,18 +122,25 @@ namespace CodewarsEx2
                             }
                             if (count != 0)
                                 return false;
+                            counter[i] = 'z';
+                            if (j >= 0)
+                            {
+                                counter[j] = 'z';
+                            }
                             else
                             {
-                                counter[i] = 'z';
-                                counter[j] = 'z';
+                                counter[j + 1] = 'z';
                             }
                             break;
                         case '}':
                             j = i - 1;
-                            count = 0;
+                            if (j >= 0)
+                                count = 0;
+                            else
+                                count = 1000;
                             while (j >= 0 && counter[j] != '{')
                             {
-                                if (counter[j] == '(' | counter[j] == '{')
+                                if (counter[j] == '(' | counter[j] == '[')
                                     count++;
                                 else
                                     if (counter[j] != 'z')
@@ -130,24 +149,33 @@ namespace CodewarsEx2
                             }
                             if (count != 0)
                                 return false;
+                            counter[i] = 'z';
+                            if (j >= 0)
+                            {
+                                counter[j] = 'z';
+                            }
                             else
                             {
-                                counter[i] = 'z';
-                                counter[j] = 'z';
+                                counter[j + 1] = 'z';
                             }
                             break;
                         default:
+                            d++;
                             break;
                     }
                 }
-                return true;
+                if (d != counter.Length)
+                    return true;
+                else
+                    return false;
             }
 
             Console.WriteLine(validBraces("(){}[]"));     
             Console.WriteLine(validBraces("([{}])"));     
-            Console.WriteLine(validBraces("(}"));  
+            Console.WriteLine(validBraces("}(}"));  
             Console.WriteLine(validBraces("[(])"));     
             Console.WriteLine(validBraces("[({})](]"));
+            Console.WriteLine(validBraces("))"));
             Console.ReadKey();
         }
     }

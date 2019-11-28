@@ -64,66 +64,85 @@ namespace CodewarsEx2
             Console.WriteLine(is_valid_IP("12.34.56.-1"));
             Console.WriteLine(is_valid_IP("123.045.067.089"));
             Console.ReadKey();
+            Console.WriteLine("\n");
 
             //Второе задание
             //https://www.codewars.com/kata/5277c8a221e209d3f6000b56/train/csharp
 
             bool validBraces(String braces)
             {
-                /*int counter1 = 0;   //  ()
-                int counter2 = 0;   //  []
-                int counter3 = 0;   //  {}
-                char[] count = braces.ToCharArray();
-                for (int i = 0; i < braces.Length; i++)
+                char[] counter = braces.ToCharArray();
+                for (int i = 0; i < counter.Length; i++)
                 {
-                    if (count[i] == '(')
-                        counter1++;
-                    if (count[i] == '[')
-                        counter2++;
-                    if (count[i] == '{')
-                        counter3++;
-                    if (count[i] == ')' | count[i] == ']' | count[i] == '}' & counter1 != 0 &
-                        counter2 != 0 & counter3 != 0)
-                        for (int j = i; j < braces.Length; j++)
-                        {
-                            if ()
-                        }
+                    switch (counter[i])
+                    {
+                        case ')':
+                            int j = i - 1;
+                            int count = 0;
+                            while (j >= 0 && counter[j] != '(')
+                            {
+                                if (counter[j] == '[' | counter[j] == '{')
+                                    count++;
+                                else
+                                    if (counter[j] != 'z')
+                                        count--;
+                                j--;
+                            }
+                            if (count != 0)
+                                return false;
+                            else
+                            {
+                                counter[i] = 'z';
+                                counter[j] = 'z';
+                            }
+                            break;
+                        case ']':
+                            j = i - 1;
+                            count = 0;
+                            while (j >= 0 && counter[j] != '[')
+                            {
+                                if (counter[j] == '(' | counter[j] == '{')
+                                    count++;
+                                else
+                                    if (counter[j] != 'z')
+                                    count--;
+                                j--;
+                            }
+                            if (count != 0)
+                                return false;
+                            else
+                            {
+                                counter[i] = 'z';
+                                counter[j] = 'z';
+                            }
+                            break;
+                        case '}':
+                            j = i - 1;
+                            count = 0;
+                            while (j >= 0 && counter[j] != '{')
+                            {
+                                if (counter[j] == '(' | counter[j] == '{')
+                                    count++;
+                                else
+                                    if (counter[j] != 'z')
+                                    count--;
+                                j--;
+                            }
+                            if (count != 0)
+                                return false;
+                            else
+                            {
+                                counter[i] = 'z';
+                                counter[j] = 'z';
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 return true;
-            */
-                int[,] simpos = new int[3, braces.Length / 2];  //simbol & position
-                int simbol1Count = 0;
-                int simbol2Count = 0;
-                int simbol3Count = 0;
-                int simbol1Pos = 0;
-                int simbol2Pos = 0;
-                int simbol3Pos = 0;
-                for (int i = 0; i < braces.Length; i++)
-                {
-                    if (braces[i] == '(')   //  0
-                    {
-                        simpos[0, simbol1Pos] = i;
-                        simbol1Count++;
-                        simbol1Pos++;
-                    }
-                    if (braces[i] == '[')   //  1
-                    {
-                        simpos[0, simbol2Pos] = i;
-                        simbol2Count++;
-                        simbol2Pos++;
-                    }
-                    if (braces[i] == '{')   //  2
-                    {
-                        simpos[0, simbol3Pos] = i;
-                        simbol3Count++;
-                        simbol3Pos++;
-                    }
-                    if (braces[i] == ')')
-                    {
-
-                    }
-                }
             }
+
             Console.WriteLine(validBraces("(){}[]"));     
             Console.WriteLine(validBraces("([{}])"));     
             Console.WriteLine(validBraces("(}"));  

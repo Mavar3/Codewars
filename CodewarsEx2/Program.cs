@@ -177,6 +177,43 @@ namespace CodewarsEx2
             Console.WriteLine(validBraces("[({})](]"));
             Console.WriteLine(validBraces("))"));
             Console.ReadKey();
+            Console.WriteLine("\n");
+
+            //Третья задача.
+            //https://www.codewars.com/kata/513e08acc600c94f01000001/train/csharp
+            string Rgb(int r, int g, int b)
+            {
+                int[] rgbInt = { r, g, b };
+                string rgbHex = "";
+                for (int i = 0; i < rgbInt.Length; i++)
+                {
+                    if (0 <= rgbInt[i] && rgbInt[i] <= 255)
+                    {
+                        if (rgbInt[i] < 16)
+                        {
+                            rgbHex += "0";
+                        }
+                        rgbHex += Convert.ToString(rgbInt[i], 16).ToUpper();
+                    }
+                    else
+                    {
+                        if (rgbInt[i] < 0)
+                        {
+                            rgbHex += "00";
+                        }
+                        else
+                        {
+                            rgbHex += "FF";
+                        }
+                    }
+                }
+                return rgbHex;
+            }
+            Console.WriteLine(Rgb(255, 255, 255));  // returns FFFFFF
+            Console.WriteLine(Rgb(255, 255, 300));  // returns FFFFFF
+            Console.WriteLine(Rgb(0, 0, 0));        // returns 000000
+            Console.WriteLine(Rgb(148, 0, 211));    // returns 9400D3
+            Console.ReadKey();
         }
     }
 }

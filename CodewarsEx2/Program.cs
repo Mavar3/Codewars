@@ -214,6 +214,41 @@ namespace CodewarsEx2
             Console.WriteLine(Rgb(0, 0, 0));        // returns 000000
             Console.WriteLine(Rgb(148, 0, 211));    // returns 9400D3
             Console.ReadKey();
+            Console.WriteLine("\n");
+
+            //Четвёртая задача
+            //https://www.codewars.com/kata/520b9d2ad5c005041100000f/train/csharp
+
+            string PigIt(string text)
+            {
+                string[] word = text.Split();
+                text = "";
+                for (int i = 0; i < word.Length; i++)
+                {
+                    char[] letter = word[i].ToCharArray();
+                    char firstLetter = letter[0];
+                    for (int j = 1; j < letter.Length; j++)
+                    {
+                        text += letter[j];
+                    }
+                    text += firstLetter;
+                    if (firstLetter != '!' && firstLetter != '?' && firstLetter != '.' && i != word.Length - 1)
+                    {
+                        text += "ay ";
+                    }
+                    else
+                    {
+                        if (i == word.Length - 1)
+                        {
+                            text += "ay";
+                        }
+                    }
+                }
+                return text;
+            }
+            Console.WriteLine(PigIt("Pig latin is cool")); // igPay atinlay siay oolcay
+            Console.WriteLine(PigIt("Hello world !"));     // elloHay orldway !
+            Console.ReadKey();
         }
     }
 }

@@ -258,44 +258,25 @@ namespace CodewarsEx2
             //https://www.codewars.com/kata/551dd1f424b7a4cdae0001f0/train/csharp
             string WhoIsNext(string[] names, long n)
             {
-                long dlin = names.Length;
+                long dlin = 0;
+                long score = names.Length;
                 long kol = 1;
-                while (dlin <= n)
+                while (score < n)
                 {
                     kol *= 2;
-                    dlin = dlin + kol * names.Length;
+                    dlin = score;
+                    score = score + kol * names.Length;
                 }
-                if (kol > 1)
-                {
-                    dlin = dlin - kol * names.Length;
-                    //kol /= 2;
-                }
-                long ostOch = 0;
-                if (n <= dlin )
-                {
-                    ostOch = n % dlin;
-                }
-                else
-                {
-                    ostOch = n - dlin;
-                }
-                if (ostOch == 0) // шестой тест по этому условию. Если его нет, то выход за пределы массива, если есть, то ждёт Penny
-                {
-                    return names[names.Length - 1];
-                }
-                else
-                {
-                    double promez = Math.Ceiling(Convert.ToDouble(ostOch) / Convert.ToDouble(kol));
-                    int ost = Convert.ToInt32(promez)-1;
-                    return names[ost];
-                }
-                // 5 - 1; 10 - 2; 20 - 4; 40 - 8 Перв; 48 < 52 Втор; 56 < 52 Третье;
+                long ostOch = n - dlin;
+                int ost = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(ostOch) / Convert.ToDouble(kol))) - 1;
+                return names[ost];
             }
             string[] namesOfPerson = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
             Console.WriteLine("Пятая задача!\n");
             Console.WriteLine(WhoIsNext(namesOfPerson, 1));             //== "Sheldon"
             Console.WriteLine(WhoIsNext(namesOfPerson, 52));            //== "Penny"
             Console.WriteLine(WhoIsNext(namesOfPerson, 7230702951));    //== "Leonard"
+            Console.WriteLine(WhoIsNext(namesOfPerson, 5));             //== "Howard"
             Console.ReadKey();
             Console.WriteLine("\n");
         }

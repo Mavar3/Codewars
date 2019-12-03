@@ -45,6 +45,7 @@ namespace CodewarsEx2
                     }
                 return true;
             }
+            Console.WriteLine("Первая задача!\n");
             Console.WriteLine("Must True");
             Console.WriteLine(is_valid_IP("0.0.0.0"));
             Console.WriteLine(is_valid_IP("12.255.56.1"));
@@ -169,7 +170,7 @@ namespace CodewarsEx2
                 else
                     return false;
             }
-
+            Console.WriteLine("Вторая задача!\n");
             Console.WriteLine(validBraces("(){}[]"));     
             Console.WriteLine(validBraces("([{}])"));     
             Console.WriteLine(validBraces("}(}"));  
@@ -209,6 +210,7 @@ namespace CodewarsEx2
                 }
                 return rgbHex;
             }
+            Console.WriteLine("Третья задача!\n");
             Console.WriteLine(Rgb(255, 255, 255));  // returns FFFFFF
             Console.WriteLine(Rgb(255, 255, 300));  // returns FFFFFF
             Console.WriteLine(Rgb(0, 0, 0));        // returns 000000
@@ -246,9 +248,56 @@ namespace CodewarsEx2
                 }
                 return text;
             }
+            Console.WriteLine("Четвёртая задача!\n");
             Console.WriteLine(PigIt("Pig latin is cool")); // igPay atinlay siay oolcay
             Console.WriteLine(PigIt("Hello world !"));     // elloHay orldway !
             Console.ReadKey();
+            Console.WriteLine("\n");
+
+            //Пятая задача
+            //https://www.codewars.com/kata/551dd1f424b7a4cdae0001f0/train/csharp
+            string WhoIsNext(string[] names, long n)
+            {
+                long dlin = names.Length;
+                long kol = 1;
+                while (dlin <= n)
+                {
+                    kol *= 2;
+                    dlin = dlin + kol * names.Length;
+                }
+                if (kol > 1)
+                {
+                    dlin = dlin - kol * names.Length;
+                    //kol /= 2;
+                }
+                long ostOch = 0;
+                if (n <= dlin )
+                {
+                    ostOch = n % dlin;
+                }
+                else
+                {
+                    ostOch = n - dlin;
+                }
+                if (ostOch == 0) // шестой тест по этому условию. Если его нет, то выход за пределы массива, если есть, то ждёт Penny
+                {
+                    return names[names.Length - 1];
+                }
+                else
+                {
+                    double promez = Math.Ceiling(Convert.ToDouble(ostOch) / Convert.ToDouble(kol));
+                    int ost = Convert.ToInt32(promez)-1;
+                    return names[ost];
+                }
+                // 5 - 1; 10 - 2; 20 - 4; 40 - 8 Перв; 48 < 52 Втор; 56 < 52 Третье;
+            }
+            string[] namesOfPerson = new string[] { "Sheldon", "Leonard", "Penny", "Rajesh", "Howard" };
+            Console.WriteLine("Пятая задача!\n");
+            Console.WriteLine(WhoIsNext(namesOfPerson, 1));             //== "Sheldon"
+            Console.WriteLine(WhoIsNext(namesOfPerson, 52));            //== "Penny"
+            Console.WriteLine(WhoIsNext(namesOfPerson, 7230702951));    //== "Leonard"
+            Console.ReadKey();
+            Console.WriteLine("\n");
         }
     }
 }

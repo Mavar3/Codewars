@@ -20,7 +20,7 @@ namespace CodewarsEx2
                     bool validIp = IPAddress.TryParse(IpAddres, out ip);
                     return validIp && ip.ToString()==IpAddres;
                  *
-                 */ 
+                 */
                 string[] Numbers = ipAddres.Split('.');
                 if (Numbers.Length != 4)
                     return false;
@@ -171,10 +171,10 @@ namespace CodewarsEx2
                     return false;
             }
             Console.WriteLine("Вторая задача!\n");
-            Console.WriteLine(validBraces("(){}[]"));     
-            Console.WriteLine(validBraces("([{}])"));     
-            Console.WriteLine(validBraces("}(}"));  
-            Console.WriteLine(validBraces("[(])"));     
+            Console.WriteLine(validBraces("(){}[]"));
+            Console.WriteLine(validBraces("([{}])"));
+            Console.WriteLine(validBraces("}(}"));
+            Console.WriteLine(validBraces("[(])"));
             Console.WriteLine(validBraces("[({})](]"));
             Console.WriteLine(validBraces("))"));
             Console.ReadKey();
@@ -277,6 +277,51 @@ namespace CodewarsEx2
             Console.WriteLine(WhoIsNext(namesOfPerson, 52));            //== "Penny"
             Console.WriteLine(WhoIsNext(namesOfPerson, 7230702951));    //== "Leonard"
             Console.WriteLine(WhoIsNext(namesOfPerson, 5));             //== "Howard"
+            Console.ReadKey();
+            Console.WriteLine("\n");
+
+            //Шестая задача
+            //https://www.codewars.com/kata/52a382ee44408cea2500074c/train/csharp
+            int Determinant(int[][] matrix)
+            {
+                int counter = 0;
+                if (matrix.Length == 1)
+                {
+                    return matrix[0][0];
+                }
+                else
+                {
+                    int[][] detMatrix = new int[matrix.Length - 1][];
+                    for (int i = 0; i < detMatrix.Length; i++)
+                    {
+                        detMatrix[i] = new int[detMatrix.Length];
+                    }
+                    for (int i = 0; i < matrix[0].Length; i++)
+                    {
+                        for (int j = 1; j < matrix.Length; j++)
+                        {
+                            int d = 0;
+                            for (int k = 0; k < matrix[j].Length; k++)
+                            {
+                                if (k != i)
+                                {
+                                    detMatrix[j - 1][k + d] = matrix[j][k];
+                                }
+                                else
+                                {
+                                    d = -1;
+                                    continue;
+                                }
+                            }
+                        }
+                        counter += Convert.ToInt32(Math.Pow(-1, Convert.ToDouble(i))) * matrix[0][i] * Determinant(detMatrix);
+                    }
+                    return counter;
+                }
+            }
+
+            Console.WriteLine("Шестая задача!\n");
+            Console.WriteLine(Determinant(new int[][] { new[] { 2, 5, 3 }, new[] { 1, -2, -1 }, new[] { 1, 3, 4 } }));
             Console.ReadKey();
             Console.WriteLine("\n");
         }

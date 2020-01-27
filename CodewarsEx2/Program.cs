@@ -8,6 +8,11 @@ namespace CodewarsEx2
 {
     class Program
     {
+        class Fractions
+        {
+
+        }
+
         static void Main(string[] args)
         {
             //Первое задание
@@ -322,6 +327,42 @@ namespace CodewarsEx2
 
             Console.WriteLine("Шестая задача!\n");
             Console.WriteLine(Determinant(new int[][] { new[] { 2, 5, 3 }, new[] { 1, -2, -1 }, new[] { 1, 3, 4 } }));
+            Console.ReadKey();
+            Console.WriteLine("\n");
+
+            //Седьмая задача
+            //https://www.codewars.com/kata/5270d0d18625160ada0000e4/train/csharp
+            int Score(int[] dice)
+            {
+                Int16 amountDice = 5;
+                Int16 valueDice = 6;
+                int finalScore = 0;
+                Int16[] diceNumber = new Int16[6] { 0, 0, 0, 0, 0, 0 };
+
+                //Создание массива количества значений на кубиках
+                for (Int16 i = 0; i < amountDice; i++)
+                    diceNumber[dice[i] - 1]++;
+
+                //Проверка, больше ли трёх одинаковых значений
+                for (Int16 i = 0; i < valueDice; i++)
+                    if (diceNumber[i] >= 3)
+                    {
+                        if (i + 1 == 1)                     //Для единицы особый случай
+                            finalScore += 1000;
+                        else
+                            finalScore += (i + 1) * 100;
+                        diceNumber[i] -= 3;
+                    }
+
+                //Добавляю оставшиеся 1 и 5.
+                finalScore += diceNumber[0] * 100 + diceNumber[4] * 50;
+
+
+                return finalScore;
+            }
+
+            Console.WriteLine("Седьмая задача!\n");
+            Console.WriteLine("Ответ к седьмой задаче: {0}.", Score(new int[] { 4, 4, 4, 3, 3 }));
             Console.ReadKey();
             Console.WriteLine("\n");
         }

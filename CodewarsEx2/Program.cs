@@ -365,6 +365,39 @@ namespace CodewarsEx2
             Console.WriteLine("Ответ к седьмой задаче: {0}.", Score(new int[] { 4, 4, 4, 3, 3 }));
             Console.ReadKey();
             Console.WriteLine("\n");
+
+            //Восьмая задача
+            //https://www.codewars.com/kata/5263a84ffcadb968b6000513/train/csharp
+            int[,] MatrixMultiplication(int[,] a, int[,] b)
+            {
+                //a.GetLength(0);                       //Строка a матрицы
+                //a.GetLength(1);                       //Столбец a матрицы
+                if (a.GetLength(1) != b.GetLength(0))   //Основное правило перемножения матриц
+                    return null;
+                else
+                {
+                    int[,] multiMatrix = new int[b.GetLength(1), a.GetLength(0)];
+                    for (int i = 0; i < b.GetLength(1); i++)            // Новая матрица будет количество столбцов второй *
+                        for (int j = 0; j < a.GetLength(0); j++)        // на количество строк первой.
+                            for (int k = 0; k < a.GetLength(1); k++)    // количество произведений, равное стобцам первой матрицы
+                                                                        // или строкам второй. Можно как угодно
+                                multiMatrix[i, j] += a[i, k] * b[k, j]; // O(n^3) WTF?!?!?!?!      
+                    return multiMatrix;
+                }
+            }
+
+            Console.WriteLine("Восьмая задача!\n");
+            int[,] firstMatrix = { { 9, 7 }, { 0, 1 } };
+            int[,] secondMatrix = { { 1, 1 }, { 4, 12 } };
+            int[,] expected = { { 37, 93 }, { 4, 12 } };
+            int[,] actual = MatrixMultiplication(firstMatrix, secondMatrix);
+            //Console.WriteLine();
+            Console.ReadKey();
+            Console.WriteLine("\n");
+
+
+
+
         }
     }
 }
